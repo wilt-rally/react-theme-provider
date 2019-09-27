@@ -8,13 +8,14 @@ import type { WithThemeType } from './createWithTheme';
 import type { ThemeProviderType } from './createThemeProvider';
 import type { $DeepShape } from './types';
 
-export type ThemingType<T> = {
+export type ThemingType<T: {}> = {
+  ThemeContext: React.Context<T>,
   ThemeProvider: ThemeProviderType<T>,
   withTheme: WithThemeType<T>,
   useTheme(overrides?: $DeepShape<T>): T,
 };
 
-export default function createTheming<T: Object>(
+export default function createTheming<T: {}>(
   defaultTheme: T
 ): ThemingType<T> {
   const ThemeContext: React.Context<T> = React.createContext(defaultTheme);
